@@ -17,7 +17,7 @@ lib:registerContext({
         description = 'Payer mes factures',
         onSelect = function()
             --ESX.ShowNotification("~y~ca fonctionne")
-            TriggerEvent("okokBilling:ToggleMyInvoices")
+          ExecuteCommand("showbills")
         end,
       },
       {
@@ -42,9 +42,9 @@ lib:registerContext({
 lib:registerContext({
     id = 'gps_menu',
     title = 'GPS',
-    menu = 'some_menu1',
+    menu = 'some_menu',
     onBack = function()
-      --print('Went back!')
+      lib:showContext('persomenu')
     end,
     options = {
       {
@@ -98,21 +98,24 @@ lib:registerContext({
 lib:registerContext({
   id = 'vehicle_menu',
   title = 'Parametre',
-  menu = 'some_menu3',
+  menu = 'some_menu',
   onBack = function()
-    --print('Went back!')
+    lib:showContext('persomenu')
   end,
   options = {
     {
       title = 'Eteindre le moteur',
       onSelect = function() 
+        local vehicle   = GetVehiclePedIsIn(playerPed, false)
         SetVehicleEngineOn(GetVehiclePedIsIn(PlayerPedId()), false, false, true)
         SetVehicleUndriveable(GetVehiclePedIsIn(PlayerPedId()), false)
       end,
     },
     {
       title = 'Passer en Conducteur',
-      onSelect = function() 
+      onSelect = function()
+        local plyPed = PlayerPedId()
+        local plyVehicle = GetVehiclePedIsIn(plyPed, false) 
         SetPedIntoVehicle(plyPed, plyVehicle, -1)
       end,
     },
@@ -135,9 +138,9 @@ lib:registerContext({
 lib:registerContext({
     id = 'settings_menu',
     title = 'Parametre',
-    menu = 'some_menu2',
+    menu = 'some_menu',
     onBack = function()
-      --print('Went back!')
+      lib:showContext('persomenu')
     end,
     options = {
         --[[
